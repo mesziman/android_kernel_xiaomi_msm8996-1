@@ -52,6 +52,9 @@ static const char *boost_devices[] = {
 static struct delayed_work wake_unboost_work;
 static struct work_struct wake_boost_work;
 
+/* Set Default GPU Max Freq For booting */
+#define GPU_DEFAULT_BOOTUP_FREQ 624000000
+
 /**
  * find_device_devfreq() - find devfreq struct using device pointer
  * @dev:	device pointer used to lookup device devfreq.
@@ -98,7 +101,7 @@ static void devfreq_set_freq_limits(struct devfreq *devfreq)
 	}
 
 	devfreq->min_freq = min;
-	devfreq->max_freq = max;
+	devfreq->max_freq = GPU_DEFAULT_BOOTUP_FREQ;
 }
 
 /**
